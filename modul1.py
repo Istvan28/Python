@@ -13,38 +13,35 @@ def save_task(tasks):
 def tasks_to_strings(tasks):
     result = ""
     for task_id, task_values in tasks.items():
-        result += f"{task_id}: {task_values['title']} | {task_values['desc']} | {task_values['priority_text']} | {task_values['status']}\n"
+        result += f"{task_id}: {task_values['title']} | {task_values['desc']} | {task_values['priority']} | {task_values['status']}\n"
     return result
 
 def priority_def():
     try:
            while True:
-            priority = int(input("Выберите приоритет задачи (1 - низкий, 2 - средний, 3 - высокий): "))
+            priority = int(input("Выберите приоритет задачи (1 - low, 2 - middle, 3 - high): "))
             if priority == 1:
-                priority_text = "низкий"
-                break
+                return "low"
             elif priority == 2:
-                priority_text = "средний"
-                break
+                return "middle"
             elif priority == 3:
-                priority_text = "высокий"
-                break
+                return "high"
             else:
               print("Пожалуйста, введите цифру от 1 до 3.")
     except ValueError:
          print("Пожалуйста, введите допустимое число.")
-         save_task(priority_text)
+         save_task(priority)
 
 def status_def():
      while True:
         try:
-            status = int(input("Выберите статус важности задачи (1 - низкий, 2 - средний, 3 - высокий): "))
+            status = int(input("Выберите статус важности задачи (1 - low, 2 - middle, 3 - high): "))
             if status == 1:
-                return "низкий"
+                return "low"
             elif status == 2:
-                return "средний"
+                return "middle"
             elif status == 3:
-                return "высокий"
+                return "high"
             else:
                 print("Пожалуйста, введите цифру от 1 до 3.")
         except ValueError:
@@ -56,10 +53,10 @@ def status_def():
 def create_task(task_id):
             title = input("Введи название: ")
             desc = input("Введи описание: ")
-            priority_text = priority_def()
+            priority = priority_def()
             status = status_def()
             save_task(tasks)
-            return {task_id: {"title": title, "desc": desc, "priority_text": priority_text, "status": status}}
+            return {task_id: {"title": title, "desc": desc, "priority": priority, "status": status}}
 
           
 
