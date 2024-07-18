@@ -78,6 +78,33 @@ def delete_task():
      except ValueError:
          print("Введите число.")
 
+def update_task():
+    view_task()
+    try:
+        update = int(input("Введите ID задачи: "))
+        if update in tasks:
+             new_title = input("Введите новое название задачи: ")
+             new_desc = input("Введите новое описание задачи: ")
+             priority = priority_def()
+             status = status_def()
+             tasks[update] = {
+                 "title": new_title,
+                 "desc": new_desc,
+                 "priority": priority,
+                 "status": status
+             }
+
+             with open("tasks.txt", "w") as file:
+                 content = save_task(tasks)
+                 file.write.__str__(content)
+                 print(f"Изменено {content}")
+        else:
+            print("Задача с таким ID не найдена.")
+    except ValueError:
+        print("Введи число.")
+    except TypeError:
+        print("Обновлено")
+
      
 
 def gen_task(tasks):
@@ -92,7 +119,7 @@ def ask():
         try:
             print("1. Создать задачу")
             print("2. Обновить задачу")
-            print("3. Пgосмотреть задачу")
+            print("3. Просмотреть задачу")
             print("4. Удалить задачи")
             print("5. Поиск(Введите ключевое слово: )")
             print("6. Выход")
@@ -100,11 +127,14 @@ def ask():
             if user_choice == 1:
                 gen_task(tasks)
                 print("Задача создана.")
-            # elif user_choice == 2:
+            elif user_choice == 2:
+                update_task()
             elif user_choice == 3:
                 view_task()
             elif user_choice == 4:
                 delete_task()
+            # elif user_choice == 5:
+
             elif user_choice == 6:
                 print("Вы вышли ")
                 break
