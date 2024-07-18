@@ -67,10 +67,17 @@ def view_task():
 
 def delete_task():
      view_task()
-     delete_choice = int(input("Введи ID задачи: "))
-     with open("tasks.txt", "w") as file:
-          pass
-     print("Задача удалена")
+     try:
+         delete_choice = int(input("Введи ID задачи: "))
+         if delete_choice in tasks:
+             del tasks[delete_choice]
+             save_task(tasks)
+             print(f"Задача с ID {delete_choice} удалена.")
+         else:
+             print("Задача с таким ID не найдена.")
+     except ValueError:
+         print("Введите число.")
+
      
 
 def gen_task(tasks):
@@ -98,6 +105,9 @@ def ask():
                 view_task()
             elif user_choice == 4:
                 delete_task()
+            elif user_choice == 6:
+                print("Вы вышли ")
+                break
         except ValueError:
             print("Введи номер задачи!!!")
 
