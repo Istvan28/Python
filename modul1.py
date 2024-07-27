@@ -47,9 +47,6 @@ def status_def():
         except ValueError:
             print("Пожалуйста, введите допустимое число.")
    
-          
-          
-
 def create_task(task_id):
             title = input("Введи название: ")
             desc = input("Введи описание: ")
@@ -57,8 +54,6 @@ def create_task(task_id):
             status = status_def()
             save_task(tasks)
             return {task_id: {"title": title, "desc": desc, "priority": priority, "status": status}}
-
-          
 
 def view_task():
      with open("tasks.txt", "r") as file:
@@ -105,15 +100,12 @@ def update_task():
     except TypeError:
         print("Обновлено")
 
-     
-
 def gen_task(tasks):
     task_id = gen_id(tasks)
     data = create_task(task_id)
     tasks.update(data)
     save_task(tasks)
 
-   
 def ask():
     while True:
         try:
